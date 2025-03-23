@@ -6,8 +6,20 @@ import ChatMessage, { MessageType } from './ChatMessage';
 import ChatInput from './ChatInput';
 import LoadingDots from './LoadingDots';
 import { useChatbot } from '@/hooks/useChatbot';
-import { ArrowDown, Bot, Minimize2 } from 'lucide-react';
+import { ArrowDown, Bot, Minimize2, Trash2 } from 'lucide-react';
 import { Button } from './ui/button';
+import { 
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { useToast } from "@/hooks/use-toast";
 
 const ChatContainer: React.FC = () => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -15,6 +27,7 @@ const ChatContainer: React.FC = () => {
   const [isScrolledToBottom, setIsScrolledToBottom] = useState(true);
   const chatContainerRef = useRef<HTMLDivElement>(null);
   const [isChatOpen, setIsChatOpen] = useState(false);
+  const { toast } = useToast();
 
   // Scroll to bottom when messages change
   useEffect(() => {
@@ -51,6 +64,15 @@ const ChatContainer: React.FC = () => {
     setIsChatOpen(false);
   };
 
+  const handleClearChat = () => {
+    clearMessages();
+    toast({
+      title: "Chat cleared",
+      description: "Your conversation history has been deleted",
+      duration: 3000,
+    });
+  };
+
   return (
     <div className="flex flex-col h-full max-h-full overflow-hidden">
       <AnimatePresence mode="wait">
@@ -69,14 +91,46 @@ const ChatContainer: React.FC = () => {
                 </div>
                 <span className="text-sm font-medium">Chat Assistant</span>
               </div>
-              <Button 
-                variant="ghost" 
-                size="icon" 
-                className="h-8 w-8 rounded-full hover:bg-muted"
-                onClick={handleMinimizeChat}
-              >
-                <Minimize2 className="h-4 w-4" />
-              </Button>
+              <div className="flex items-center gap-1">
+                <AlertDialog>
+                  <AlertDialogTrigger asChild>
+                    <Button 
+                      variant="ghost" 
+                      size="icon" 
+                      className="h-8 w-8 rounded-full hover:bg-muted text-muted-foreground hover:text-destructive"
+                      disabled={messages.length === 0}
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </Button>
+                  </AlertDialogTrigger>
+                  <AlertDialogContent>
+                    <AlertDialogHeader>
+                      <AlertDialogTitle>Clear conversation?</AlertDialogTitle>
+                      <AlertDialogDescription>
+                        This will permanently delete your entire chat history. This action cannot be undone.
+                      </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                      <AlertDialogCancel>Cancel</AlertDialogCancel>
+                      <AlertDialogAction 
+                        onClick={handleClearChat}
+                        className="bg-destructive hover:bg-destructive/90"
+                      >
+                        Clear
+                      </AlertDialogAction>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialog>
+                
+                <Button 
+                  variant="ghost" 
+                  size="icon" 
+                  className="h-8 w-8 rounded-full hover:bg-muted"
+                  onClick={handleMinimizeChat}
+                >
+                  <Minimize2 className="h-4 w-4" />
+                </Button>
+              </div>
             </div>
             
             <div 

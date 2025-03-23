@@ -11,8 +11,8 @@ export type MessageType = {
 };
 
 const variants = {
-  hidden: { opacity: 0, y: 10 },
-  visible: { opacity: 1, y: 0 }
+  hidden: { opacity: 0, y: 10, scale: 0.95 },
+  visible: { opacity: 1, y: 0, scale: 1 }
 };
 
 interface ChatMessageProps {
@@ -31,7 +31,7 @@ const ChatMessage: React.FC<ChatMessageProps> = ({ message }) => {
       initial="hidden"
       animate="visible"
       variants={variants}
-      transition={{ duration: 0.3, ease: "easeOut" }}
+      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
     >
       <div
         className={cn(
@@ -43,7 +43,7 @@ const ChatMessage: React.FC<ChatMessageProps> = ({ message }) => {
           isBot ? "hover:shadow-md" : "hover:bg-primary/95"
         )}
       >
-        <p className="text-sm leading-relaxed">{message.content}</p>
+        <p className="text-sm leading-relaxed whitespace-pre-line">{message.content}</p>
         <span className={cn(
           "text-xs mt-1 block",
           isBot ? "text-muted-foreground" : "text-primary-foreground/70"

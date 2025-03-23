@@ -47,17 +47,20 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage, isLoading }) => {
     <motion.form 
       onSubmit={handleSubmit}
       className={cn(
-        "relative mt-2 w-full max-w-4xl mx-auto",
+        "relative w-full max-w-4xl mx-auto",
         "transition-all duration-300 ease-in-out",
         isFocused ? "scale-[1.01]" : "scale-100"
       )}
       layout
+      initial={{ y: 0 }}
+      animate={{ y: 0 }}
+      whileHover={{ y: -2 }}
     >
       <div className={cn(
-        "relative flex items-end rounded-2xl p-1",
-        "bg-white/80 backdrop-blur-md border border-border/80 shadow-sm",
+        "relative flex items-end rounded-full p-1",
+        "bg-white/90 backdrop-blur-md border border-border/80 shadow-md",
         "transition-all duration-300",
-        isFocused ? "shadow-md border-primary/20 bg-white/90" : ""
+        isFocused ? "shadow-lg border-primary/20 bg-white" : ""
       )}>
         <Button
           type="button"
@@ -84,7 +87,7 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage, isLoading }) => {
           onKeyDown={handleKeyDown}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
-          placeholder="Message..."
+          placeholder="Ask me anything..."
           className={cn(
             "flex-1 max-h-32 bg-transparent border-0 focus:ring-0 focus:outline-none",
             "text-sm py-3 px-2 resize-none",

@@ -29,13 +29,22 @@ const Index = () => {
         <Header />
         
         <motion.main 
-          className="flex-1 container px-4 mx-auto max-w-4xl flex flex-col"
+          className="flex-1 container px-4 pb-4 pt-12 mx-auto max-w-4xl flex flex-col"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
         >
-          <div className="flex-1 flex flex-col rounded-2xl shadow-sm overflow-hidden bg-white/60 backdrop-blur-md border border-white/40 relative">
-            <ChatContainer />
+          <div className="flex-1 flex flex-col">
+            <div className="mt-auto">
+              <motion.div
+                className="rounded-2xl shadow-sm overflow-hidden bg-white/60 backdrop-blur-md border border-white/40 relative h-[70vh]"
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.2, duration: 0.5 }}
+              >
+                <ChatContainer />
+              </motion.div>
+            </div>
           </div>
         </motion.main>
         

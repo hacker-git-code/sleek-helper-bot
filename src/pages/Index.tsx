@@ -15,12 +15,15 @@ const Index = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 1.5 }}
         >
-          {/* Abstract Background */}
-          <div className="absolute top-0 right-0 w-2/3 h-1/3 bg-accent/30 rounded-full filter blur-[100px] transform translate-x-1/3 -translate-y-1/2 animate-blob animation-delay-2000"></div>
-          <div className="absolute bottom-0 left-0 w-2/3 h-1/3 bg-accent/20 rounded-full filter blur-[100px] transform -translate-x-1/3 translate-y-1/2 animate-blob animation-delay-4000"></div>
+          {/* Abstract Background with improved gradients */}
+          <div className="absolute top-0 right-0 w-2/3 h-1/3 bg-gradient-to-bl from-accent/40 to-accent/10 rounded-full filter blur-[100px] transform translate-x-1/3 -translate-y-1/2 animate-blob animation-delay-2000"></div>
+          <div className="absolute bottom-0 left-0 w-2/3 h-1/3 bg-gradient-to-tr from-accent/30 to-accent/5 rounded-full filter blur-[100px] transform -translate-x-1/3 translate-y-1/2 animate-blob animation-delay-4000"></div>
           
-          {/* Minimal grid pattern */}
-          <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,.8)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.8)_1px,transparent_1px)] bg-[size:100px_100px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-[0.1]"></div>
+          {/* Additional subtle accent */}
+          <div className="absolute top-1/2 left-1/2 w-1/3 h-1/3 bg-primary/5 rounded-full filter blur-[120px] transform -translate-x-1/2 -translate-y-1/2 animate-pulse"></div>
+          
+          {/* Minimal grid pattern with improved opacity */}
+          <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,.6)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.6)_1px,transparent_1px)] bg-[size:100px_100px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-[0.07]"></div>
         </motion.div>
         
         <Header />
@@ -31,7 +34,7 @@ const Index = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
         >
-          <div className="flex-1 flex flex-col border border-border/50 rounded-2xl shadow-sm overflow-hidden bg-background/80 backdrop-blur-sm">
+          <div className="flex-1 flex flex-col rounded-2xl shadow-sm overflow-hidden bg-white/60 backdrop-blur-md border border-white/40 relative">
             <ChatContainer />
           </div>
         </motion.main>

@@ -1,6 +1,6 @@
 
 import React, { useState, useRef, useEffect } from 'react';
-import { Send, Mic, Image, X } from 'lucide-react';
+import { Send, Mic, Image, X, Smile } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -54,10 +54,10 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage, isLoading }) => {
       layout
     >
       <div className={cn(
-        "glass relative flex items-end rounded-2xl p-1",
-        "border border-border/80 shadow-sm",
+        "relative flex items-end rounded-2xl p-1",
+        "bg-white/80 backdrop-blur-md border border-border/80 shadow-sm",
         "transition-all duration-300",
-        isFocused ? "shadow-md border-primary/20" : ""
+        isFocused ? "shadow-md border-primary/20 bg-white/90" : ""
       )}>
         <Button
           type="button"
@@ -66,6 +66,15 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage, isLoading }) => {
           className="h-10 w-10 rounded-xl text-muted-foreground hover:text-foreground shrink-0"
         >
           <Image className="h-5 w-5" />
+        </Button>
+        
+        <Button
+          type="button"
+          size="icon"
+          variant="ghost"
+          className="h-10 w-10 rounded-xl text-muted-foreground hover:text-foreground shrink-0"
+        >
+          <Smile className="h-5 w-5" />
         </Button>
         
         <textarea
@@ -111,7 +120,7 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage, isLoading }) => {
                 type="submit"
                 disabled={isLoading || !message.trim()}
                 className={cn(
-                  "h-10 w-10 rounded-xl ml-1 shrink-0",
+                  "h-10 w-10 rounded-xl ml-1 shrink-0 bg-gradient-to-r from-primary to-primary/90",
                   isLoading ? "opacity-50 cursor-not-allowed" : ""
                 )}
               >

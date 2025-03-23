@@ -36,7 +36,9 @@ const ChatMessage: React.FC<ChatMessageProps> = ({ message }) => {
       <div
         className={cn(
           "max-w-[80%] px-4 py-3 rounded-2xl",
-          isBot ? "bg-white shadow-sm border border-border/50" : "bg-primary text-primary-foreground",
+          isBot 
+            ? "bg-gradient-to-br from-white to-accent/30 shadow-sm border border-border/50" 
+            : "bg-gradient-to-br from-primary to-primary/90 text-primary-foreground",
           "transform transition-all duration-200 ease-out",
           isBot ? "hover:shadow-md" : "hover:bg-primary/95"
         )}

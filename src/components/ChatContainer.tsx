@@ -6,10 +6,11 @@ import ChatMessage, { MessageType } from './ChatMessage';
 import ChatInput from './ChatInput';
 import LoadingDots from './LoadingDots';
 import { useChatbot } from '@/hooks/useChatbot';
+import { ArrowDown, Bot } from 'lucide-react';
 
 const ChatContainer: React.FC = () => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const { messages, sendMessage, isLoading } = useChatbot();
+  const { messages, sendMessage, isLoading, clearMessages } = useChatbot();
   const [isScrolledToBottom, setIsScrolledToBottom] = useState(true);
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
@@ -49,22 +50,8 @@ const ChatContainer: React.FC = () => {
               transition={{ duration: 0.5, delay: 0.2 }}
             >
               <div className="mb-6">
-                <div className="w-16 h-16 mx-auto rounded-full bg-accent flex items-center justify-center">
-                  <svg 
-                    viewBox="0 0 24 24" 
-                    className="w-8 h-8 text-primary" 
-                    fill="none" 
-                    stroke="currentColor" 
-                    strokeWidth="2"
-                  >
-                    <path d="M12 16a4 4 0 100-8 4 4 0 000 8z"></path>
-                    <path d="M18 9v4"></path>
-                    <path d="M18 20a2 2 0 100-4 2 2 0 000 4z"></path>
-                    <path d="M4 5h10"></path>
-                    <path d="M4 9h6"></path>
-                    <path d="M4 15h6"></path>
-                    <path d="M4 19h6"></path>
-                  </svg>
+                <div className="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-accent to-accent/30 flex items-center justify-center">
+                  <Bot className="w-8 h-8 text-primary/80" />
                 </div>
               </div>
               <h3 className="text-xl font-medium mb-2">How can I assist you today?</h3>
@@ -86,7 +73,7 @@ const ChatContainer: React.FC = () => {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
               >
-                <div className="bg-white px-4 py-3 rounded-2xl shadow-sm border border-border/50">
+                <div className="bg-gradient-to-br from-white to-accent/30 px-4 py-3 rounded-2xl shadow-sm border border-border/50">
                   <LoadingDots className="text-primary" />
                 </div>
               </motion.div>
@@ -107,19 +94,7 @@ const ChatContainer: React.FC = () => {
             className="absolute bottom-28 right-8 p-2 rounded-full bg-primary text-primary-foreground shadow-md"
             onClick={scrollToBottom}
           >
-            <svg 
-              xmlns="http://www.w3.org/2000/svg" 
-              width="16" 
-              height="16" 
-              viewBox="0 0 24 24" 
-              fill="none" 
-              stroke="currentColor" 
-              strokeWidth="2" 
-              strokeLinecap="round" 
-              strokeLinejoin="round"
-            >
-              <polyline points="6 9 12 15 18 9"></polyline>
-            </svg>
+            <ArrowDown className="h-4 w-4" />
           </motion.button>
         )}
       </AnimatePresence>
